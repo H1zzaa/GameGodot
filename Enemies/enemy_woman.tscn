@@ -1,0 +1,349 @@
+[gd_scene load_steps=21 format=3 uid="uid://d2wmxiq63am2j"]
+
+[ext_resource type="Script" path="res://Enemies/enemy_woman.gd" id="1_7yos7"]
+[ext_resource type="Texture2D" uid="uid://cgpdc6ajdiu7s" path="res://ResEnemies/Enemy_Woman_Hit.png" id="2_n32sv"]
+[ext_resource type="Texture2D" uid="uid://1aggtlil1aqw" path="res://ResEnemies/Enemy_Woman_Death.png" id="2_n81lv"]
+[ext_resource type="Texture2D" uid="uid://ykm8h6fk6pdn" path="res://ResEnemies/Enemy_Woman_Walk.png" id="2_of628"]
+[ext_resource type="Texture2D" uid="uid://5js8irsb1yv4" path="res://ResEnemies/Enemy_Woman_Idle.png" id="3_pk458"]
+[ext_resource type="Texture2D" uid="uid://0tu6rehh8pia" path="res://ResEnemies/Enemy_Woman_Punch.png" id="5_2whr8"]
+[ext_resource type="AudioStream" uid="uid://ddnlfjoahb60r" path="res://Sounds/EnemyDamaged.mp3" id="7_ltjnf"]
+[ext_resource type="AudioStream" uid="uid://dn8jv6e5xljo3" path="res://Sounds/EnemyPunch.wav" id="8_4nje3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3f61o"]
+height = 32.0
+
+[sub_resource type="Animation" id="Animation_85c7n"]
+resource_name = "Hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_n32sv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_jht2j"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_pk458")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_v35af"]
+resource_name = "Punch"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_2whr8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"punch"
+}, {
+"args": [],
+"method": &"end_punching"
+}, {
+"args": [],
+"method": &"move_to_player"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_mro8v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pu18s"]
+resource_name = "Walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_of628")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_bcuox"]
+resource_name = "Death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_n81lv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a4iqx"]
+_data = {
+"Death": SubResource("Animation_bcuox"),
+"Hit": SubResource("Animation_85c7n"),
+"Idle": SubResource("Animation_jht2j"),
+"Punch": SubResource("Animation_v35af"),
+"RESET": SubResource("Animation_mro8v"),
+"Walk": SubResource("Animation_pu18s")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gqkdv"]
+radius = 110.005
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eytdc"]
+size = Vector2(28, 25.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pt0xi"]
+size = Vector2(9, 4.75)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xur2r"]
+height = 32.0
+
+[node name="Enemy_Woman" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_7yos7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_3f61o")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -9)
+texture = ExtResource("5_2whr8")
+hframes = 6
+
+[node name="AnimationEnemyWoman" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a4iqx")
+}
+
+[node name="DetectionPlayerArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="Detection" type="CollisionShape2D" parent="DetectionPlayerArea"]
+shape = SubResource("CircleShape2D_gqkdv")
+debug_color = Color(0.909804, 0.827451, 0.427451, 0.419608)
+metadata/_edit_lock_ = true
+
+[node name="AttackDetectionCollision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="AttackDetection" type="CollisionShape2D" parent="AttackDetectionCollision"]
+position = Vector2(2, 2.25)
+shape = SubResource("RectangleShape2D_eytdc")
+debug_color = Color(0.109804, 0.372549, 0.831373, 0.419608)
+metadata/_edit_lock_ = true
+
+[node name="AttackCollision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+monitorable = false
+
+[node name="Attack" type="CollisionShape2D" parent="AttackCollision"]
+position = Vector2(11.5, 1.625)
+shape = SubResource("RectangleShape2D_pt0xi")
+debug_color = Color(1, 1, 1, 0.419608)
+metadata/_edit_lock_ = true
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_xur2r")
+debug_color = Color(1, 0.584314, 0.584314, 0.419608)
+metadata/_edit_lock_ = true
+
+[node name="EnemyDamaged" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ltjnf")
+volume_db = -10.0
+area_mask = 4
+
+[node name="EnemyPunch" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_4nje3")
+volume_db = -10.0
+area_mask = 4
+
+[connection signal="body_entered" from="DetectionPlayerArea" to="." method="_on_detection_player_area_body_entered"]
+[connection signal="body_exited" from="DetectionPlayerArea" to="." method="_on_detection_player_area_body_exited"]
+[connection signal="body_entered" from="AttackDetectionCollision" to="." method="_on_attack_detection_collision_body_entered"]
+[connection signal="body_entered" from="AttackCollision" to="." method="_on_attack_collision_body_entered"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

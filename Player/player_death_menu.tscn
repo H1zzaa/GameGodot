@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckad16y4wrn72"]
+
+[ext_resource type="Script" path="res://Player/player_death_menu.gd" id="1_ehr70"]
+[ext_resource type="Texture2D" uid="uid://cicghw5wu8ct5" path="res://DeathBackground.png" id="2_udjdv"]
+[ext_resource type="FontFile" uid="uid://2t657tvvabvb" path="res://Font/ButtonsFont.otf" id="3_guywn"]
+
+[node name="Player_Death_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ehr70")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(1, 0.592157, 0.592157, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_udjdv")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.265
+anchor_right = 0.5
+anchor_bottom = 0.265
+offset_left = -265.5
+offset_top = -51.72
+offset_right = 265.5
+offset_bottom = 51.28
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("3_guywn")
+theme_override_font_sizes/font_size = 100
+text = "You Died!"
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -56.0
+offset_right = 300.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Restart" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
+theme_override_fonts/font = ExtResource("3_guywn")
+theme_override_font_sizes/font_size = 45
+text = "Respawn
+"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Restart")
+theme_override_fonts/font = ExtResource("3_guywn")
+theme_override_font_sizes/font_size = 45
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

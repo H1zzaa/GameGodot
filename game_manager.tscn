@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqirw7n1prgjy"]
+
+[ext_resource type="Script" path="res://game_manager.gd" id="1_nvl5q"]
+[ext_resource type="PackedScene" uid="uid://dv8xhqmssqk42" path="res://PauseMenu/pause_menu.tscn" id="4_7lpse"]
+
+[node name="GameManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_nvl5q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" node_paths=PackedStringArray("game_manager") instance=ExtResource("4_7lpse")]
+game_manager = NodePath("../..")
